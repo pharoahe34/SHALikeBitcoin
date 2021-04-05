@@ -1,5 +1,5 @@
 """
-App that help you to encode your data in a sha256 way
+App that show you how you can mine bitcoin (data encode in sha256)
 """
 
 # importing libraries
@@ -17,7 +17,7 @@ def SHA256(text):
 
     return sha256(text.encode("ascii")).hexdigest()
 
-# constructing new hash key and finding nonce number  
+# constructing new hash key and finding nonce number
 def mine(block_number, transactions, previous_hash, prefix_zeros):
     """
     * block_number:-> int of the block number
@@ -33,21 +33,28 @@ def mine(block_number, transactions, previous_hash, prefix_zeros):
         new_hash = SHA256(text)
         # new hash started with '0'
         if new_hash.startswith(prefix_str):
-            print(f"Successfully mined bitcoins with nonce value:{nonce}")
+            print(f"Successfully mined bitcoins with nonce value : {nonce}")
             return new_hash
 
     raise BaseException(f"Couldn't find correct has after trying {MAX_NONCE} times")
 
-if __name__=='__main__':
-    
+
+if __name__ == "__main__":
+
     # settings
-    transactions = "Marc/Jules->20, Mike/Cara->45"
-    difficulty = 4 # higher number will take more time for mining as difficulty increases
-    
+    transactions = "Marc/Jules->20, Mike/Cara->45 Toto/Momo->100"
+    difficulty = 5  # higher number will take more time for mining as difficulty increases (20 for bitcoin mining)
+    number_blocks = 5 # number of the transaction's block 
+
     # initialized counter
     start = time.time()
     print("Start mining")
-    new_hash = mine(5, transactions, '0000000xa036944e29568d0cff17edbe038f81208fecf9a66be9a2b8321c6ec7', difficulty)
+    new_hash = mine(
+        number_blocks,
+        transactions,
+        "0000000xa036944e29568d0cff17edbe038f81208fecf9a66be9a2b8321c6ec7",
+        difficulty,
+    )
     total_time = str((time.time() - start))
-    print(f"End of mining.\nMining took: {total_time} seconds")
-    print(new_hash)
+    print(f"Mining took: {total_time} seconds\nEnd of mining.")
+    print(f"New hash: {new_hash}")
