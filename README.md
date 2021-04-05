@@ -1,2 +1,4 @@
 # SHALikeBitcoin
-Encode your data as bitcoin managed it
+
+This repository contains a small program that can mine bitcoin block.
+This show also how exactly bitcoin mining works.
